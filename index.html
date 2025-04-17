@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 - Page Not Found</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ERROR 404</title>
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --padding-side: 2rem;
     }
 
     html, body {
@@ -14,62 +14,96 @@
       padding: 0;
       height: 100%;
       background-color: #000;
-      color: #fff;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: left;
+      color: #fff;
+      overflow-x: hidden;
     }
 
     .container {
-      padding: 2rem;
-      max-width: 800px;
-      width: 100%;
+      padding: 4rem var(--padding-side);
+      max-width: 1000px;
     }
 
     h1 {
       font-size: 6rem;
-      margin: 0;
-      font-weight: bold;
+      margin: 0 0 0.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: left;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: normal;
-      margin-top: 0.5rem;
-      color: #bbb;
+      margin-top: 0;
+      color: #ccc;
+      text-align: left;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 1rem 0 0 0;
+      text-align: left;
     }
 
     .button {
+      display: inline-block;
       margin-top: 2rem;
       padding: 0.75rem 1.5rem;
       background-color: #fff;
       color: #000;
+      text-decoration: none;
       border: none;
       border-radius: 4px;
       font-size: 1rem;
-      text-decoration: none;
       transition: background-color 0.3s ease;
-      display: inline-block;
+      text-align: left;
     }
 
     .button:hover {
       background-color: #ddd;
     }
 
-    @media (max-width: 600px) {
+    .ref-code {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
       h1 {
         font-size: 4rem;
       }
 
       h2 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
 
-      .button {
+      p, .button {
         font-size: 0.95rem;
-        padding: 0.6rem 1.2rem;
+      }
+
+      .container {
+        padding: 3rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 3rem;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+      }
+
+      p, .button {
+        font-size: 0.9rem;
+      }
+
+      .container {
+        padding: 2rem 1rem;
       }
     }
   </style>
@@ -78,7 +112,10 @@
   <div class="container">
     <h1>404</h1>
     <h2>Uh-oh... Page not found</h2>
-    <a href="index.html" class="button">Back to Homepage</a>
+    <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <p>Please check the URL for errors or click the following button to proceed:</p>
+    <a href="video.html" class="button">Back to Homepage</a>
+    <p class="ref-code">Reference Code: #ERR-404-PRX</p>
   </div>
 </body>
 </html>
