@@ -28,12 +28,12 @@
       padding: 10px;
       box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
       z-index: 5000;
-      animation: blink 0.5s infinite alternate;
+      animation: blink 0.3s infinite alternate;
     }
 
     @keyframes blink {
-      from { filter: brightness(1.1); }
-      to { filter: brightness(1.8); }
+      from { filter: brightness(1.2); }
+      to { filter: brightness(2); }
     }
 
     .popup pre {
@@ -139,7 +139,7 @@
     function autoSpawn() {
       setInterval(() => {
         createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-      }, 200);
+      }, 80); // Speed increased
     }
 
     window.onload = () => {
