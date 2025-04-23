@@ -2,108 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>🔥 VIRUS ALERT 🔥</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading...</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      background-color: #000;
-      font-family: monospace;
       overflow: hidden;
+      background: black;
+      color: lime;
+      font-family: 'Courier New', Courier, monospace;
+      user-select: none;
     }
 
-    .bsod {
+    body.shake {
+      animation: shake 0.2s infinite;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-5px, 5px); }
+      50% { transform: translate(5px, -5px); }
+      75% { transform: translate(-5px, -5px); }
+    }
+
+    .screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: #0000AA;
-      color: white;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      font-size: 1.2rem;
-      z-index: 999;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: repeating-linear-gradient(45deg, #ff0000, #ff0000 10px, #ffff00 10px, #ffff00 20px);
+      z-index: 1;
+      padding: 1rem;
+    }
+
+    .screen h1 {
+      font-size: 6vw;
+      color: #00ffff;
+      text-shadow: 3px 3px red;
+      font-family: 'Impact', fantasy;
+    }
+
+    .info {
+      margin-top: 1rem;
+      font-size: 4vw;
+    }
+
+    .progress-container {
+      width: 80%;
+      max-width: 400px;
+      background: #222;
+      margin-top: 1rem;
+      border: 3px solid lime;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background: lime;
+      width: 0%;
+      transition: width 0.3s;
     }
 
     .popup {
       position: absolute;
-      width: 300px;
-      height: 150px;
-      background: white;
-      border: 2px solid red;
-      color: black;
+      width: 200px;
+      background: #ffff00;
+      color: #ff0000;
       padding: 1rem;
-      box-shadow: 0 0 10px red;
-      font-size: 1rem;
+      border: 4px dashed #000;
+      font-size: 3.5vw;
+      font-family: 'Comic Sans MS', cursive;
+      transform: rotate(0deg);
       z-index: 9999;
+      box-shadow: 0 0 10px fuchsia;
     }
 
-    @keyframes shake {
-      0%, 100% { transform: translate(0, 0); }
-      20% { transform: translate(-5px, 5px); }
-      40% { transform: translate(5px, -5px); }
-      60% { transform: translate(-5px, -5px); }
-      80% { transform: translate(5px, 5px); }
-    }
-
-    body.shake {
-      animation: shake 0.3s infinite;
-    }
-
-    .downloading {
-      margin-top: 2rem;
-      width: 80%;
-      max-width: 300px;
-      background: #333;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress {
-      height: 20px;
-      width: 0%;
-      background: limegreen;
-      transition: width 0.3s;
-    }
-
-    @media (max-width: 480px) {
-      .bsod {
-        font-size: 1rem;
-        padding: 1rem;
-      }
+    @media (min-width: 600px) {
       .popup {
-        width: 90%;
-        height: auto;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        width: 250px;
+      }
+      .screen h1 {
+        font-size: 3rem;
+      }
+      .info {
+        font-size: 1.2rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="bsod">
-    <div>💀 <strong>CRITICAL SYSTEM ERROR</strong> 💀</div>
-    <div>Tracking your IP address: <span id="ip">Loading...</span></div>
-    <div class="downloading">
-      <div class="progress" id="progressBar"></div>
+  <div class="screen">
+    <h1>💣 SYSTEM INFECTED 💣</h1>
+    <div class="info">IP: <span id="ip">loading...</span></div>
+    <div class="info">Tracking location: <span id="loc">unknown</span></div>
+    <div class="info">Virus: <span id="virus">initializing...</span></div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
     </div>
-    <div style="margin-top:1rem; font-size:0.9rem">All files being leaked... Please wait.</div>
+    <div class="info" style="margin-top:10px;">🔥 DO NOT CLOSE THIS WINDOW 🔥</div>
   </div>
 
   <script>
-    // Simulate IP detection (fake)
-    document.getElementById('ip').textContent = "192.168." + Math.floor(Math.random() * 100) + "." + Math.floor(Math.random() * 100);
+    const ip = `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+    const cities = ["Moscow", "Brooklyn", "Seoul", "Wuhan", "Berlin", "Rome", "Tokyo", "Paris", "Lagos"];
+    const viruses = ["W32/Nightmare", "Trojan.MoneySteal", "Worm.Sabrina.666", "Malware.Screamer"];
 
-    // Progress bar simulation
+    document.getElementById("ip").textContent = ip;
+    document.getElementById("loc").textContent = cities[Math.floor(Math.random() * cities.length)];
+    document.getElementById("virus").textContent = viruses[Math.floor(Math.random() * viruses.length)];
+
     let progress = 0;
     const bar = document.getElementById('progressBar');
+
     const interval = setInterval(() => {
       if (progress < 100) {
         progress += Math.random() * 10;
@@ -113,35 +134,43 @@
       }
     }, 300);
 
-    // Shake effect
-    setTimeout(() => {
-      document.body.classList.add('shake');
-    }, 3000);
+    setTimeout(() => document.body.classList.add('shake'), 2000);
 
-    // Popup generator
+    const messages = [
+      "🛑 Windows DETECTED a threat!",
+      "💾 Downloading data to 4chan...",
+      "📡 Your WIFI has been hijacked!",
+      "👁 FBI OPEN UP!",
+      "🔥 GPU Overheating...",
+      "📞 Calling 911...",
+      "💣 BOOT SECTOR OVERRIDE",
+      "💳 Credit Card Leaked!"
+    ];
+
     function spawnPopup() {
       const popup = document.createElement('div');
       popup.className = 'popup';
-      popup.innerHTML = '<strong>VIRUS ALERT!</strong><br>Your data is being stolen!';
-      popup.style.top = Math.random() * (window.innerHeight - 150) + 'px';
-      popup.style.left = Math.random() * (window.innerWidth - 300) + 'px';
+      popup.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+      popup.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+      popup.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+      popup.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
       document.body.appendChild(popup);
     }
 
-    // Keep spawning popups
-    setInterval(() => {
-      spawnPopup();
-    }, 800);
+    setInterval(() => spawnPopup(), 400);
 
-    // Trigger vibration if supported
-    if (navigator.vibrate) {
-      setInterval(() => navigator.vibrate(200), 1000);
-    }
-
-    // Tap/click to simulate explosion of popups
     window.addEventListener('click', () => {
       for (let i = 0; i < 10; i++) spawnPopup();
     });
+
+    // Optional audio
+    const sound = new Audio("https://www.myinstants.com/media/sounds/windows-xp-error.mp3");
+    setInterval(() => sound.play().catch(() => {}), 5000);
+
+    // Vibration
+    if (navigator.vibrate) {
+      setInterval(() => navigator.vibrate(150), 1000);
+    }
   </script>
 </body>
 </html>
