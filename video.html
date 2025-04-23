@@ -37,7 +37,7 @@
       z-index: 9999;
       padding: 20px;
       box-shadow: 0 0 20px #ff0000;
-      animation: popupAlert 0.5s ease-out, popupIn 0.1s ease-in;
+      animation: popupAlert 0.5s ease-out, popupIn 0.1s ease-in, popupFlashing 1s infinite;
       text-align: center;
       font-size: 1.2rem;
       font-weight: bold;
@@ -54,14 +54,25 @@
       to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
 
+    @keyframes popupFlashing {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
     .popup {
       position: absolute;
       font-size: 0.75rem;
       padding: 10px;
       box-shadow: 2px 2px #808080;
       z-index: 5000;
-      animation: slideIn 0.1s ease-out;
+      animation: slideIn 0.1s ease-out, popupFlashing 1s infinite;
       opacity: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #808080;
     }
 
     @keyframes slideIn {
@@ -82,6 +93,15 @@
       font-size: 0.7rem;
       cursor: pointer;
       font-weight: bold;
+      animation: glitch 0.3s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(3px); }
+      50% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+      100% { transform: translateX(0); }
     }
 
     iframe {
@@ -105,12 +125,6 @@
 </head>
 <body>
   <div class="lockdown" id="lock"></div>
-
-  <div class="first-popup" id="firstPopup">
-    <h3>WARNING</h3>
-    <p>Unauthorized device behavior detected. Tap OK to resolve.</p>
-    <button onclick="startBreach()">OK</button>
-  </div>
 
   <audio id="clickSound" src="https://www.myinstants.com/media/sounds/windows-xp-error.mp3"></audio>
 
@@ -188,14 +202,8 @@
       }, 50); // Popups appear every 50ms for rapid glitch effect
     }
 
-    function startBreach() {
-      document.getElementById('firstPopup').remove();
-      document.getElementById('lock').remove();
-      document.getElementById('clickSound').play();
-
-      createPopup(window.innerWidth / 2, window.innerHeight / 2);
-      autoSpawn();
-    }
+    // Start Breach and flood the screen with popups
+    autoSpawn();
   </script>
 </body>
 </html>
