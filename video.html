@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>SYSTEM BREACH</title>
@@ -11,185 +11,140 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #000;
+      background: #c0c0c0;
       font-family: 'Courier New', monospace;
-      color: #fff;
+      color: #000;
       touch-action: none;
-    }
-
-    .lockdown {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1;
     }
 
     .popup {
       position: absolute;
+      width: auto;
+      max-width: 300px;
+      min-width: 180px;
+      background: #e0e0e0;
+      border: 3px outset #808080;
+      font-size: 0.8rem;
       padding: 10px;
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.7);
+      box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
       z-index: 5000;
-      animation: neonFlicker 1s infinite alternate;
-      opacity: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      border: 2px outset #fff;
-      border-radius: 2px;
-      background: #c0c0c0;
-      color: #000;
-      font-family: Tahoma, sans-serif;
+      animation: blink 0.5s infinite alternate;
     }
 
-    @keyframes neonFlicker {
-      0%, 100% {
-        box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 30px #0ff;
-      }
-      50% {
-        box-shadow: 0 0 5px #f0f, 0 0 10px #0ff;
-      }
+    @keyframes blink {
+      from { filter: brightness(1.1); }
+      to { filter: brightness(1.8); }
     }
 
     .popup pre {
       white-space: pre-wrap;
-      word-wrap: break-word;
-      margin: 0 0 10px;
-      color: #000;
     }
 
-    .popup .btn-group {
+    .popup .btn-container {
       display: flex;
-      flex-direction: row;
       justify-content: center;
-      gap: 5px;
-      margin-top: auto;
-      flex-wrap: wrap;
-      width: 100%;
+      flex-wrap: nowrap;
+      gap: 4px;
+      margin-top: 10px;
+      flex-direction: row;
     }
 
     .popup button {
-      background: #fff;
+      background: #c0c0c0;
       color: #000;
-      border: 2px outset #000;
-      padding: 5px 10px;
-      font-size: 0.7rem;
+      border: 2px outset #808080;
+      padding: 4px 10px;
+      font-size: 0.75rem;
       cursor: pointer;
       font-weight: bold;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .popup button:hover {
-      background: #000;
-      color: #fff;
-      box-shadow: 0 0 10px #f0f;
+      flex-shrink: 0;
     }
 
     iframe {
       width: 100%;
-      height: 120px;
+      height: 160px;
       margin-top: 8px;
       border: none;
     }
 
     @media (max-width: 600px) {
-      .popup {
-        width: 85%;
-        font-size: 0.6rem;
+      .popup .btn-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
       }
 
-      .popup .btn-group {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+      .popup button {
+        min-width: 80px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="lockdown" id="lock"></div>
-
   <audio id="clickSound" src="https://www.myinstants.com/media/sounds/windows-xp-error.mp3"></audio>
 
   <script>
     const fakeLogs = [
-      ...Array.from({ length: 100 }, (_, i) => `Log ${i + 1} :: ${Math.random().toString(36).substring(2, 10)} -- ${new Date().toISOString()}`),
-      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`
+      ...Array.from({ length: 50 }, (_, i) => `Log ${i + 1} :: ${Math.random().toString(36).substring(2, 10)} -- ${new Date().toISOString()}`),
+      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nIPV6: fe80:fcdc:ef:fb22::d9\nUPNP: Enabled\nDMZ: 10.112.42.1\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`
     ];
 
     const videoLinks = [
-    "https://www.youtube.com/embed/sISkfNmRaKg?autoplay=1",
-      "https://www.youtube.com/embed/HmIMmFAV4BY?autoplay=1",
-      "https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1",
-      "https://www.youtube.com/embed/figrl0aOULs?autoplay=1",
-      "https://www.youtube.com/embed/MkmYuK17x6M?autoplay=1",
-      "https://www.youtube.com/embed/CN_MZpHkkgc?autoplay=1",
-      "https://www.youtube.com/embed/77BtpGz1ZDg?autoplay=1"
-    ];
-
-    const buttonTexts = [
-      "Click for more info", "Unlock Access", "Download Now", "Fix Issue", "Confirm Settings",
-      "Enter the Vault", "Trace Route", "View Logs", "Bypass Warning", "Enable Protocol",
-      "Reboot", "Scan Ports", "Request Token", "Open Session", "Reveal Code"
+      "https://www.youtube.com/embed/sISkfNmRaKg?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/HmIMmFAV4BY?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/figrl0aOULs?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/MkmYuK17x6M?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/CN_MZpHkkgc?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/77BtpGz1ZDg?autoplay=1&mute=1"
     ];
 
     function createPopup(x, y) {
       const popup = document.createElement('div');
       popup.className = 'popup';
-      popup.style.width = `${Math.floor(Math.random() * 250 + 200)}px`;
-      popup.style.height = `${Math.floor(Math.random() * 120 + 100)}px`;
-      popup.style.top = `${y}px`;
-      popup.style.left = `${x}px`;
 
-      const content = document.createElement('pre');
-      content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
-      popup.appendChild(content);
+      if (Math.random() < 0.5) {
+        const content = document.createElement('pre');
+        content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
+        popup.appendChild(content);
+      } else {
+        const iframe = document.createElement('iframe');
+        iframe.src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
+        iframe.allow = "autoplay; encrypted-media";
+        popup.appendChild(iframe);
+      }
 
-      const btnGroup = document.createElement('div');
-      btnGroup.className = 'btn-group';
+      const btnContainer = document.createElement('div');
+      btnContainer.className = 'btn-container';
 
-      const shuffled = [...buttonTexts].sort(() => 0.5 - Math.random()).slice(0, 3);
-      shuffled.forEach(text => {
+      const labels = ['CLICK HERE', 'MORE INFO', 'CONFIRM', 'CONTINUE', 'YES', 'LAUNCH'];
+
+      labels.forEach(label => {
         const btn = document.createElement('button');
-        btn.textContent = text;
+        btn.textContent = label;
         btn.onclick = () => {
           document.getElementById('clickSound').play();
-          popup.remove();
+          for (let j = 0; j < 5; j++) {
+            createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+          }
         };
-        btnGroup.appendChild(btn);
+        btnContainer.appendChild(btn);
       });
 
-      popup.appendChild(btnGroup);
-
-      const iframe = document.createElement('iframe');
-      iframe.src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
-      popup.appendChild(iframe);
-
+      popup.appendChild(btnContainer);
+      popup.style.top = `${y}px`;
+      popup.style.left = `${x}px`;
       document.body.appendChild(popup);
     }
 
     function autoSpawn() {
-      let lastX = 0;
-      let lastY = 0;
       setInterval(() => {
-        let x = Math.random() * window.innerWidth;
-        let y = Math.random() * window.innerHeight;
-
-        // Check if the new position is too close to the last one
-        if (Math.abs(x - lastX) < 100 && Math.abs(y - lastY) < 100) {
-          x = (x + 150) % window.innerWidth;
-          y = (y + 150) % window.innerHeight;
-        }
-
-        lastX = x;
-        lastY = y;
-        createPopup(x, y);
-      }, 50);
+        createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+      }, 200);
     }
 
-    autoSpawn();
+    window.onload = () => {
+      autoSpawn();
+    };
   </script>
 </body>
 </html>
