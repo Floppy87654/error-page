@@ -20,7 +20,7 @@
     /* Retro Windows popup style */
     .popup {
       position: absolute;
-      width: 300px;
+      width: 250px;
       height: 150px;
       background: #C0C0C0; /* Light gray background */
       border: 2px solid #000080; /* Blue border */
@@ -38,17 +38,23 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Style for the first, inviting popup */
+    /* First popup with more exciting animations */
     .first-popup {
       background: #00FF00; /* Bright green background */
       color: #000080; /* Dark blue text */
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       border: 2px solid #000080;
       box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
       text-align: center;
       padding: 20px;
       cursor: pointer;
       font-weight: bold;
+      animation: popupAppear 1s ease-in-out;
+    }
+
+    @keyframes popupAppear {
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     /* First Popup button for OK */
@@ -60,7 +66,7 @@
       color: #FFFFFF;
       border: none;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       border-radius: 5px;
       transition: background 0.3s ease;
     }
@@ -70,7 +76,7 @@
       color: #000080;
     }
 
-    /* Style for the main lock screen */
+    /* Lockdown effect */
     .lockdown {
       position: fixed;
       top: 0;
@@ -87,11 +93,26 @@
       text-align: center;
     }
 
-    /* Restrict actions - Disable right-click and keyboard actions */
+    /* Prevent actions - Disable right-click and keyboard actions */
     window.addEventListener('contextmenu', (e) => e.preventDefault());
     window.addEventListener('keydown', (e) => e.preventDefault());
     window.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
 
+    @media (max-width: 768px) {
+      .popup {
+        width: 200px;
+        height: 120px;
+        font-size: 0.9rem;
+      }
+
+      .first-popup {
+        font-size: 1.2rem;
+      }
+
+      .button {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -142,7 +163,7 @@
       // Create popups in a train-like sequence
       setInterval(() => {
         createPopup();
-      }, 100); // Popups appear faster now (every 100ms)
+      }, 70); // Popups appear extra fast now (every 70ms)
     }
 
     function createPopup() {
