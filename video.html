@@ -2,201 +2,185 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>SYSTEM BREACH</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💀 SYSTEM COMPROMISED 💀</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      background: #000080; /* Dark blue background */
+      overflow: hidden;
+      background: #c0c0c0;
       font-family: 'Courier New', monospace;
-      color: #00FF00; /* Neon green text */
-      user-select: none;
-      cursor: none;
+      color: #000;
+      touch-action: none;
     }
 
-    /* Retro Windows popup style */
-    .popup {
-      position: absolute;
-      width: 250px;
-      height: 150px;
-      background: #C0C0C0; /* Light gray background */
-      border: 2px solid #000080; /* Blue border */
-      font-size: 1rem;
-      padding: 10px;
-      z-index: 10001; /* Popup is above everything else */
-      box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
-      font-family: 'Comic Sans MS', cursive;
-      color: #000080;
-      animation: fastPopUp 0.1s ease-in-out;
-    }
-
-    @keyframes fastPopUp {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* First popup with more exciting animations */
-    .first-popup {
-      background: #00FF00; /* Bright green background */
-      color: #000080; /* Dark blue text */
-      font-size: 1.5rem;
-      border: 2px solid #000080;
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
-      text-align: center;
-      padding: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      animation: popupAppear 1s ease-in-out;
-    }
-
-    @keyframes popupAppear {
-      0% { transform: scale(0.2); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* First Popup button for OK */
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-top: 15px;
-      background: #000080;
-      color: #FFFFFF;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-    }
-
-    .button:hover {
-      background: #00FF00;
-      color: #000080;
-    }
-
-    /* Lockdown effect */
     .lockdown {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 10000; /* Overlay stays behind the popups */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #00FF00;
-      font-size: 2rem;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .first-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 340px;
+      background: #e0e0e0;
+      color: #000;
+      transform: translate(-50%, -50%);
+      border: 2px outset #808080;
+      z-index: 9999;
+      padding: 16px;
+      box-shadow: 4px 4px #808080;
+      animation: popupIn 0.1s ease-out;
       text-align: center;
     }
 
-    /* Prevent actions - Disable right-click and keyboard actions */
-    window.addEventListener('contextmenu', (e) => e.preventDefault());
-    window.addEventListener('keydown', (e) => e.preventDefault());
-    window.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
+    .first-popup h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
 
-    @media (max-width: 768px) {
-      .popup {
-        width: 200px;
-        height: 120px;
-        font-size: 0.9rem;
-      }
+    .first-popup button {
+      margin-top: 16px;
+      background: #c0c0c0;
+      color: #000;
+      border: 2px outset #808080;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-      .first-popup {
-        font-size: 1.2rem;
-      }
+    @keyframes popupIn {
+      from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
 
-      .button {
-        font-size: 1rem;
-      }
+    .popup {
+      position: absolute;
+      width: 300px;
+      background: #dcdcdc;
+      color: #000;
+      border: 2px outset #808080;
+      font-size: 0.75rem;
+      padding: 10px;
+      box-shadow: 2px 2px #808080;
+      z-index: 5000;
+      animation: glitchEffect 0.05s infinite alternate, slideIn 0.05s ease-out;
+    }
+
+    @keyframes glitchEffect {
+      0% { transform: translateX(0) skew(0deg); }
+      10% { transform: translateX(-5px) skew(-5deg); }
+      20% { transform: translateX(5px) skew(5deg); }
+      30% { transform: translateX(-3px) skew(-3deg); }
+      40% { transform: translateX(3px) skew(3deg); }
+      50% { transform: translateX(0) skew(0deg); }
+      60% { transform: translateX(5px) skew(5deg); }
+      70% { transform: translateX(-5px) skew(-5deg); }
+      80% { transform: translateX(3px) skew(3deg); }
+      90% { transform: translateX(-3px) skew(-3deg); }
+      100% { transform: translateX(0) skew(0deg); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .popup pre {
+      white-space: pre-wrap;
+    }
+
+    .popup button {
+      margin-top: 8px;
+      background: #c0c0c0;
+      color: #000;
+      border: 2px outset #808080;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    iframe {
+      width: 100%;
+      height: 160px;
+      margin-top: 8px;
+      border: none;
     }
   </style>
 </head>
 <body>
+  <div class="lockdown" id="lock"></div>
 
-  <div id="lockdown" class="lockdown">💀 SYSTEM COMPROMISED 💀<br>ACCESS DENIED</div>
+  <div class="first-popup" id="firstPopup">
+    <h3>WARNING</h3>
+    <p>Unauthorized device behavior detected. Tap OK to resolve.</p>
+    <button onclick="startBreach()">OK</button>
+  </div>
+
+  <audio id="clickSound" src="https://www.myinstants.com/media/sounds/windows-xp-error.mp3"></audio>
 
   <script>
-    const wildTexts = [
-      "🔒 SYSTEM SHUTDOWN: Critical Error Detected!",
-      "📡 RETRIEVING SYSTEM DATA...",
-      "⚠️ VIRUS DETECTED: ATTACK IN PROGRESS!",
-      "🛑 SYSTEM WARNING: Unauthorized Access Attempted",
-      "💣 BOMB DETECTED: Disarming...",
-      "🖥️ SYSTEM CORE: Offline for repairs",
-      "💥 HACKER ALERT: Initiating Countermeasures",
-      "🧠 Neural Interface Error: Rebooting...",
-      "🛰️ Satellite Connection Lost. Attempting Reconnection..."
+    const fakeLogs = [
+      ...Array.from({ length: 100 }, (_, i) => `Log ${i + 1} :: ${Math.random().toString(36).substring(2, 10)} -- ${new Date().toISOString()}`),
+      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nIPV6: fe80:fcdc:ef:fb22::d9\nUPNP: Enabled\nDMZ: 10.112.42.1\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`
     ];
 
-    const images = [
-      "https://www.clipartkey.com/mpngs/m/99-998636_error-message-clip-art-vintage-computer-error-icon-vector.png",  /* Old PC error image */
-      "https://www.kindpng.com/picc/m/411-4111864_computer-warning-sign-vintage-warning-icon-png-transparent.png",  /* Alert warning icon */
-      "https://upload.wikimedia.org/wikipedia/commons/7/7c/Computer_error_icon.png", /* Retro error sign */
-      "https://upload.wikimedia.org/wikipedia/commons/a/a4/Windows_XP_error_popup.svg"  /* Windows XP alert vector */
-    ];
+    const videoLinks = Array.from({ length: 20 }, (_, i) => `https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&start=${i}`);
 
-    const videos = [
-      "https://www.youtube.com/embed/l60MnDJklnM?autoplay=1&mute=1",
-      "https://www.youtube.com/embed/TcMBFSGVi1c?autoplay=1&mute=1"
-    ];
+    function createPopup(x, y) {
+      const popup = document.createElement('div');
+      popup.className = 'popup';
 
-    // Initial Popup to Click "OK"
-    function createInitialPopup() {
-      const div = document.createElement('div');
-      div.className = 'first-popup';
-      div.innerHTML = `
-        <div>💻 SYSTEM ERROR DETECTED</div>
-        <div>Press OK to Prevent Further Damage...</div>
-        <button class="button" onclick="startPopups()">OK</button>
-      `;
-      document.body.appendChild(div);
-    }
-
-    function startPopups() {
-      // Hide the initial lockdown screen after clicking OK
-      document.getElementById('lockdown').style.display = 'none';
-
-      // Create popups in a train-like sequence
-      setInterval(() => {
-        createPopup();
-      }, 70); // Popups appear extra fast now (every 70ms)
-    }
-
-    function createPopup() {
-      const div = document.createElement('div');
-      div.className = 'popup';
-      const rand = Math.random();
-
-      // Randomly choose a type of content for the popup (text, image, or video)
-      if (rand < 0.33) {
-        const img = document.createElement('img');
-        img.src = images[Math.floor(Math.random() * images.length)];
-        div.appendChild(img);
-      } else if (rand < 0.66) {
-        const iframe = document.createElement('iframe');
-        iframe.src = videos[Math.floor(Math.random() * videos.length)];
-        iframe.width = "230";
-        iframe.height = "130";
-        iframe.allow = "autoplay";
-        div.appendChild(iframe);
+      if (Math.random() < 0.5) {
+        const content = document.createElement('pre');
+        content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
+        popup.appendChild(content);
       } else {
-        div.innerHTML = `<div class="alert-header">ERROR!</div>${wildTexts[Math.floor(Math.random() * wildTexts.length)]}`;
+        const iframe = document.createElement('iframe');
+        iframe.src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
+        popup.appendChild(iframe);
       }
 
-      // Randomly position popups on the screen
-      div.style.top = Math.random() * (window.innerHeight - 180) + 'px';
-      div.style.left = Math.random() * (window.innerWidth - 250) + 'px';
-      document.body.appendChild(div);
+      for (let i = 0; i < Math.floor(Math.random() * 4 + 2); i++) {
+        const btn = document.createElement('button');
+        btn.textContent = ['OK', 'CONFIRM', 'YES', 'RETRY'][Math.floor(Math.random() * 4)];
+        btn.onclick = () => {
+          document.getElementById('clickSound').play();
+          for (let j = 0; j < 10; j++) {
+            createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+          }
+          popup.remove();
+        };
+        popup.appendChild(btn);
+      }
+
+      popup.style.top = `${y}px`;
+      popup.style.left = `${x}px`;
+      document.body.appendChild(popup);
     }
 
-    // Call the initial popup on load
-    window.onload = createInitialPopup;
+    function autoSpawn() {
+      setInterval(() => {
+        createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+      }, 50); // Faster spawn rate for more chaos
+    }
 
+    function startBreach() {
+      document.getElementById('firstPopup').remove();
+      document.getElementById('lock').remove();
+      document.getElementById('clickSound').play();
+
+      createPopup(window.innerWidth / 2, window.innerHeight / 2);
+      autoSpawn();
+    }
   </script>
-
 </body>
 </html>
