@@ -29,31 +29,24 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      width: 340px;
-      background: #e0e0e0;
-      color: #000;
+      width: 350px;
+      background: #ff0000;
+      color: #fff;
       transform: translate(-50%, -50%);
-      border: 2px outset #808080;
+      border: 3px solid #ffcc00;
       z-index: 9999;
-      padding: 16px;
-      box-shadow: 4px 4px #808080;
-      animation: popupIn 0.1s ease-out;
+      padding: 20px;
+      box-shadow: 0 0 20px #ff0000;
+      animation: popupAlert 0.5s ease-out, popupIn 0.1s ease-in;
       text-align: center;
-    }
-
-    .first-popup h3 {
-      margin-top: 0;
-      font-size: 1.1rem;
-    }
-
-    .first-popup button {
-      margin-top: 16px;
-      background: #c0c0c0;
-      color: #000;
-      border: 2px outset #808080;
-      padding: 8px 16px;
-      cursor: pointer;
+      font-size: 1.2rem;
       font-weight: bold;
+    }
+
+    @keyframes popupAlert {
+      0% { background: #ff0000; color: #fff; }
+      50% { background: #ffcc00; color: #000; }
+      100% { background: #ff0000; color: #fff; }
     }
 
     @keyframes popupIn {
@@ -63,7 +56,7 @@
 
     .popup {
       position: absolute;
-      width: 300px;
+      width: 250px;
       background: #dcdcdc;
       color: #000;
       border: 2px outset #808080;
@@ -71,7 +64,7 @@
       padding: 10px;
       box-shadow: 2px 2px #808080;
       z-index: 5000;
-      animation: glitchEffect 0.05s infinite alternate, slideIn 0.05s ease-out;
+      animation: glitchEffect 0.1s 2 alternate, slideIn 0.1s ease-out, disappear 0.15s forwards;
     }
 
     @keyframes glitchEffect {
@@ -91,6 +84,12 @@
     @keyframes slideIn {
       from { transform: translateY(-30px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes disappear {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
     }
 
     .popup pre {
@@ -113,6 +112,17 @@
       height: 160px;
       margin-top: 8px;
       border: none;
+    }
+
+    @media (max-width: 600px) {
+      .first-popup {
+        width: 280px;
+        font-size: 1rem;
+      }
+
+      .popup {
+        width: 220px;
+      }
     }
   </style>
 </head>
