@@ -120,11 +120,13 @@
     ];
 
     const videoLinks = [
-      'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
-      'https://www.youtube.com/embed/VbfpW0pbvaU?autoplay=1',
-      'https://www.youtube.com/embed/lbLPpBQ9_jM?autoplay=1',
-      'https://www.youtube.com/embed/z3kZXV0lYIY?autoplay=1',
-      'https://www.youtube.com/embed/SsbXUb4k95k?autoplay=1'
+    "https://www.youtube.com/embed/sISkfNmRaKg?autoplay=1",
+      "https://www.youtube.com/embed/HmIMmFAV4BY?autoplay=1",
+      "https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1",
+      "https://www.youtube.com/embed/figrl0aOULs?autoplay=1",
+      "https://www.youtube.com/embed/MkmYuK17x6M?autoplay=1",
+      "https://www.youtube.com/embed/CN_MZpHkkgc?autoplay=1",
+      "https://www.youtube.com/embed/77BtpGz1ZDg?autoplay=1"
     ];
 
     const buttonTexts = [
@@ -169,8 +171,21 @@
     }
 
     function autoSpawn() {
+      let lastX = 0;
+      let lastY = 0;
       setInterval(() => {
-        createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+
+        // Check if the new position is too close to the last one
+        if (Math.abs(x - lastX) < 100 && Math.abs(y - lastY) < 100) {
+          x = (x + 150) % window.innerWidth;
+          y = (y + 150) % window.innerHeight;
+        }
+
+        lastX = x;
+        lastY = y;
+        createPopup(x, y);
       }, 50);
     }
 
