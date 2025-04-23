@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <title>SYSTEM BREACH</title>
@@ -11,9 +11,9 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #c0c0c0;
+      background: #000;
       font-family: 'Courier New', monospace;
-      color: #000;
+      color: #fff;
       touch-action: none;
     }
 
@@ -21,87 +21,57 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.8);
       z-index: 1;
-    }
-
-    .first-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 350px;
-      background: #ff0000;
-      color: #fff;
-      transform: translate(-50%, -50%);
-      border: 3px solid #ffcc00;
-      z-index: 9999;
-      padding: 20px;
-      box-shadow: 0 0 20px #ff0000;
-      animation: popupAlert 0.5s ease-out, popupIn 0.1s ease-in, popupFlashing 1s infinite;
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    @keyframes popupAlert {
-      0% { background: #ff0000; color: #fff; }
-      50% { background: #ffcc00; color: #000; }
-      100% { background: #ff0000; color: #fff; }
-    }
-
-    @keyframes popupIn {
-      from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
-      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    }
-
-    @keyframes popupFlashing {
-      0% { opacity: 0.8; }
-      50% { opacity: 1; }
-      100% { opacity: 0.8; }
     }
 
     .popup {
       position: absolute;
       font-size: 0.75rem;
       padding: 10px;
-      box-shadow: 2px 2px #808080;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
       z-index: 5000;
-      animation: slideIn 0.1s ease-out, popupFlashing 1s infinite;
+      animation: neonFlicker 1s infinite alternate;
       opacity: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 3px solid #808080;
+      border: 3px solid #fff;
+      border-radius: 5px;
+      background: #111;
+      color: #0ff;
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(-30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes neonFlicker {
+      0% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff; }
+      50% { text-shadow: none; }
+      100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff; }
     }
 
     .popup pre {
       white-space: pre-wrap;
+      word-wrap: break-word;
+      margin: 0;
     }
 
     .popup button {
       margin-top: 8px;
-      background: #c0c0c0;
-      color: #000;
-      border: 2px outset #808080;
-      padding: 4px 10px;
+      background: transparent;
+      color: #0ff;
+      border: 2px solid #0ff;
+      padding: 5px 10px;
       font-size: 0.7rem;
       cursor: pointer;
       font-weight: bold;
-      animation: glitch 0.3s infinite;
+      border-radius: 3px;
+      transition: all 0.3s ease;
     }
 
-    @keyframes glitch {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(3px); }
-      50% { transform: translateX(-3px); }
-      75% { transform: translateX(3px); }
-      100% { transform: translateX(0); }
+    .popup button:hover {
+      background: #0ff;
+      color: #000;
+      box-shadow: 0 0 10px #0ff;
     }
 
     iframe {
@@ -112,13 +82,9 @@
     }
 
     @media (max-width: 600px) {
-      .first-popup {
-        width: 280px;
-        font-size: 1rem;
-      }
-
       .popup {
-        width: 220px;
+        width: 80%;
+        font-size: 0.6rem;
       }
     }
   </style>
@@ -142,57 +108,32 @@
       'https://www.youtube.com/embed/SsbXUb4k95k?autoplay=1'
     ];
 
-    const randomColors = [
-      '#FF6347', '#8A2BE2', '#00FA9A', '#FFD700', '#FF4500', '#32CD32', '#FF1493', '#FF6347', '#7FFF00', '#D2691E'
-    ];
-
-    const randomLinks = [
-      'https://www.bbc.com', 'https://www.cnn.com', 'https://www.reddit.com', 'https://www.wikipedia.org', 'https://www.nytimes.com'
-    ];
-
     function createPopup(x, y) {
       const popup = document.createElement('div');
       popup.className = 'popup';
       popup.style.width = `${Math.floor(Math.random() * 250 + 200)}px`; // Random width
       popup.style.height = `${Math.floor(Math.random() * 120 + 100)}px`; // Random height
-      popup.style.backgroundColor = randomColors[Math.floor(Math.random() * randomColors.length)];
+      popup.style.top = `${y}px`;
+      popup.style.left = `${x}px`;
 
-      if (Math.random() < 0.5) {
-        const content = document.createElement('pre');
-        content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
-        popup.appendChild(content);
-      } else {
-        const iframe = document.createElement('iframe');
-        iframe.src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
-        popup.appendChild(iframe);
-      }
+      const content = document.createElement('pre');
+      content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
+      popup.appendChild(content);
 
-      for (let i = 0; i < Math.floor(Math.random() * 4 + 2); i++) {
+      for (let i = 0; i < 3; i++) {
         const btn = document.createElement('button');
-        btn.textContent = ['OK', 'CONFIRM', 'YES', 'RETRY'][Math.floor(Math.random() * 4)];
+        btn.textContent = ['OK', 'CONFIRM', 'YES'][i];
         btn.onclick = () => {
           document.getElementById('clickSound').play();
-          for (let j = 0; j < 10; j++) {
-            createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-          }
           popup.remove();
         };
         popup.appendChild(btn);
       }
 
-      // Optional: adding random link to some popups
-      if (Math.random() < 0.2) {
-        const link = document.createElement('a');
-        link.href = randomLinks[Math.floor(Math.random() * randomLinks.length)];
-        link.textContent = 'Click Here for More Info';
-        link.style.color = '#FFF';
-        link.style.textDecoration = 'underline';
-        link.target = '_blank';
-        popup.appendChild(link);
-      }
+      const iframe = document.createElement('iframe');
+      iframe.src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
+      popup.appendChild(iframe);
 
-      popup.style.top = `${y}px`;
-      popup.style.left = `${x}px`;
       document.body.appendChild(popup);
     }
 
