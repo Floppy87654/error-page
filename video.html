@@ -56,29 +56,11 @@
 
     .popup {
       position: absolute;
-      width: 250px;
-      background: #dcdcdc;
-      color: #000;
-      border: 2px outset #808080;
       font-size: 0.75rem;
       padding: 10px;
       box-shadow: 2px 2px #808080;
       z-index: 5000;
-      animation: glitchEffect 0.1s 2 alternate, slideIn 0.1s ease-out, disappear 0.15s forwards;
-    }
-
-    @keyframes glitchEffect {
-      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-      10% { transform: translate(-10px, 5px) rotate(3deg) scale(1.1); }
-      20% { transform: translate(10px, -5px) rotate(-3deg) scale(0.9); }
-      30% { transform: translate(-8px, 3px) rotate(5deg) scale(1.05); }
-      40% { transform: translate(6px, -3px) rotate(-2deg) scale(0.95); }
-      50% { transform: translate(-6px, 0) rotate(0deg) scale(1); }
-      60% { transform: translate(8px, 4px) rotate(4deg) scale(1.15); }
-      70% { transform: translate(-5px, -2px) rotate(-4deg) scale(0.85); }
-      80% { transform: translate(4px, 6px) rotate(3deg) scale(1.1); }
-      90% { transform: translate(-3px, 5px) rotate(-5deg) scale(0.9); }
-      100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      animation: slideIn 0.1s ease-out, disappear 0.15s forwards;
     }
 
     @keyframes slideIn {
@@ -143,11 +125,28 @@
       `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nIPV6: fe80:fcdc:ef:fb22::d9\nUPNP: Enabled\nDMZ: 10.112.42.1\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`
     ];
 
-    const videoLinks = Array.from({ length: 20 }, (_, i) => `https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&start=${i}`);
+    const videoLinks = [
+      'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+      'https://www.youtube.com/embed/VbfpW0pbvaU?autoplay=1',
+      'https://www.youtube.com/embed/lbLPpBQ9_jM?autoplay=1',
+      'https://www.youtube.com/embed/z3kZXV0lYIY?autoplay=1',
+      'https://www.youtube.com/embed/SsbXUb4k95k?autoplay=1'
+    ];
+
+    const randomColors = [
+      '#FF6347', '#8A2BE2', '#00FA9A', '#FFD700', '#FF4500', '#32CD32', '#FF1493', '#FF6347', '#7FFF00', '#D2691E'
+    ];
+
+    const randomLinks = [
+      'https://www.bbc.com', 'https://www.cnn.com', 'https://www.reddit.com', 'https://www.wikipedia.org', 'https://www.nytimes.com'
+    ];
 
     function createPopup(x, y) {
       const popup = document.createElement('div');
       popup.className = 'popup';
+      popup.style.width = `${Math.floor(Math.random() * 250 + 200)}px`; // Random width
+      popup.style.height = `${Math.floor(Math.random() * 120 + 100)}px`; // Random height
+      popup.style.backgroundColor = randomColors[Math.floor(Math.random() * randomColors.length)];
 
       if (Math.random() < 0.5) {
         const content = document.createElement('pre');
@@ -172,15 +171,30 @@
         popup.appendChild(btn);
       }
 
+      // Optional: adding random link to some popups
+      if (Math.random() < 0.2) {
+        const link = document.createElement('a');
+        link.href = randomLinks[Math.floor(Math.random() * randomLinks.length)];
+        link.textContent = 'Click Here for More Info';
+        link.style.color = '#FFF';
+        link.style.textDecoration = 'underline';
+        link.target = '_blank';
+        popup.appendChild(link);
+      }
+
       popup.style.top = `${y}px`;
       popup.style.left = `${x}px`;
       document.body.appendChild(popup);
+
+      setTimeout(() => {
+        popup.remove();
+      }, 500); // Popup disappears quickly after a short period
     }
 
     function autoSpawn() {
       setInterval(() => {
         createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-      }, 50); // Faster spawn rate for more chaos
+      }, 200); // Popups appear every 200ms for rapid glitch effect
     }
 
     function startBreach() {
