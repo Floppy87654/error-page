@@ -27,7 +27,6 @@
 
     .popup {
       position: absolute;
-      font-size: 0.75rem;
       padding: 10px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
       z-index: 5000;
@@ -37,21 +36,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      border: 3px solid #fff;
+      border: 2px solid #fff;
       border-radius: 5px;
-      background: #111;
-      color: #0ff;
+      background: #c0c0c0;
+      color: #000;
+      font-family: Tahoma, sans-serif;
     }
 
     @keyframes neonFlicker {
       0%, 100% {
-        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff,
-                     0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
-        box-shadow: 0 0 10px #0ff;
+        box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 30px #0ff;
       }
       50% {
-        text-shadow: none;
-        box-shadow: 0 0 5px #ff00ff;
+        box-shadow: 0 0 5px #f0f, 0 0 10px #0ff;
       }
     }
 
@@ -59,37 +56,39 @@
       white-space: pre-wrap;
       word-wrap: break-word;
       margin: 0 0 10px;
+      color: #000;
     }
 
     .popup .btn-group {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      justify-content: center;
       gap: 5px;
-      width: 100%;
+      margin-top: auto;
+      flex-wrap: wrap;
     }
 
     .popup button {
-      background: transparent;
-      color: #0ff;
-      border: 2px solid #0ff;
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
       padding: 5px 10px;
       font-size: 0.7rem;
       cursor: pointer;
       font-weight: bold;
       border-radius: 3px;
       transition: all 0.3s ease;
-      width: 100%;
     }
 
     .popup button:hover {
-      background: #0ff;
-      color: #000;
-      box-shadow: 0 0 10px #0ff;
+      background: #000;
+      color: #fff;
+      box-shadow: 0 0 10px #f0f;
     }
 
     iframe {
       width: 100%;
-      height: 150px;
+      height: 120px;
       margin-top: 8px;
       border: none;
     }
@@ -98,6 +97,11 @@
       .popup {
         width: 85%;
         font-size: 0.6rem;
+      }
+
+      .popup .btn-group {
+        flex-direction: column;
+        align-items: stretch;
       }
     }
   </style>
@@ -123,7 +127,8 @@
 
     const buttonTexts = [
       "Click for more info", "Unlock Access", "Download Now", "Fix Issue", "Confirm Settings",
-      "Enter the Vault", "Trace Route", "View Logs", "Bypass Warning", "Enable Protocol"
+      "Enter the Vault", "Trace Route", "View Logs", "Bypass Warning", "Enable Protocol",
+      "Reboot", "Scan Ports", "Request Token", "Open Session", "Reveal Code"
     ];
 
     function createPopup(x, y) {
