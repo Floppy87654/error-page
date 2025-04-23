@@ -60,18 +60,13 @@
       padding: 10px;
       box-shadow: 2px 2px #808080;
       z-index: 5000;
-      animation: slideIn 0.1s ease-out, disappear 0.15s forwards;
+      animation: slideIn 0.1s ease-out;
+      opacity: 1;
     }
 
     @keyframes slideIn {
       from { transform: translateY(-30px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes disappear {
-      0% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
     }
 
     .popup pre {
@@ -185,16 +180,12 @@
       popup.style.top = `${y}px`;
       popup.style.left = `${x}px`;
       document.body.appendChild(popup);
-
-      setTimeout(() => {
-        popup.remove();
-      }, 500); // Popup disappears quickly after a short period
     }
 
     function autoSpawn() {
       setInterval(() => {
         createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-      }, 200); // Popups appear every 200ms for rapid glitch effect
+      }, 50); // Popups appear every 50ms for rapid glitch effect
     }
 
     function startBreach() {
