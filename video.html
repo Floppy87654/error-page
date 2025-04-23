@@ -57,9 +57,30 @@
         font-size: 0.85rem;
       }
     }
+
+    /* Full-screen overlay for lockdown effect */
+    .lockdown {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ff0000;
+      font-size: 2rem;
+      text-align: center;
+      pointer-events: all; /* Make sure nothing underneath is clickable */
+    }
+
   </style>
 </head>
 <body>
+  <div id="lockdown" class="lockdown">💀 SYSTEM COMPROMISED 💀<br>ACCESS DENIED</div>
+
   <script>
     const wildTexts = [
       "🔒 SYSTEM SHUTDOWN: Critical Error Detected!",
@@ -119,6 +140,11 @@
     window.addEventListener('click', () => {
       for (let i = 0; i < 10; i++) createPopup(); // Create 10 popups on click
     });
+
+    // Prevent right-click, and disable scroll and keyboard events to fully lock page
+    window.addEventListener('contextmenu', (e) => e.preventDefault());
+    window.addEventListener('keydown', (e) => e.preventDefault());
+    window.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
   </script>
 </body>
 </html>
