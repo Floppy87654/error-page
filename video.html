@@ -36,7 +36,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       border: 3px solid #fff;
       border-radius: 5px;
       background: #111;
@@ -44,19 +44,31 @@
     }
 
     @keyframes neonFlicker {
-      0% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff; }
-      50% { text-shadow: none; }
-      100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff; }
+      0%, 100% {
+        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff,
+                     0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+        box-shadow: 0 0 10px #0ff;
+      }
+      50% {
+        text-shadow: none;
+        box-shadow: 0 0 5px #ff00ff;
+      }
     }
 
     .popup pre {
       white-space: pre-wrap;
       word-wrap: break-word;
-      margin: 0;
+      margin: 0 0 10px;
+    }
+
+    .popup .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
     }
 
     .popup button {
-      margin-top: 8px;
       background: transparent;
       color: #0ff;
       border: 2px solid #0ff;
@@ -66,6 +78,7 @@
       font-weight: bold;
       border-radius: 3px;
       transition: all 0.3s ease;
+      width: 100%;
     }
 
     .popup button:hover {
@@ -76,14 +89,14 @@
 
     iframe {
       width: 100%;
-      height: 160px;
+      height: 150px;
       margin-top: 8px;
       border: none;
     }
 
     @media (max-width: 600px) {
       .popup {
-        width: 80%;
+        width: 85%;
         font-size: 0.6rem;
       }
     }
@@ -97,7 +110,7 @@
   <script>
     const fakeLogs = [
       ...Array.from({ length: 100 }, (_, i) => `Log ${i + 1} :: ${Math.random().toString(36).substring(2, 10)} -- ${new Date().toISOString()}`),
-      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nIPV6: fe80:fcdc:ef:fb22::d9\nUPNP: Enabled\nDMZ: 10.112.42.1\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`
+      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`
     ];
 
     const videoLinks = [
@@ -108,11 +121,16 @@
       'https://www.youtube.com/embed/SsbXUb4k95k?autoplay=1'
     ];
 
+    const buttonTexts = [
+      "Click for more info", "Unlock Access", "Download Now", "Fix Issue", "Confirm Settings",
+      "Enter the Vault", "Trace Route", "View Logs", "Bypass Warning", "Enable Protocol"
+    ];
+
     function createPopup(x, y) {
       const popup = document.createElement('div');
       popup.className = 'popup';
-      popup.style.width = `${Math.floor(Math.random() * 250 + 200)}px`; // Random width
-      popup.style.height = `${Math.floor(Math.random() * 120 + 100)}px`; // Random height
+      popup.style.width = `${Math.floor(Math.random() * 250 + 200)}px`;
+      popup.style.height = `${Math.floor(Math.random() * 120 + 100)}px`;
       popup.style.top = `${y}px`;
       popup.style.left = `${x}px`;
 
@@ -120,15 +138,21 @@
       content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
       popup.appendChild(content);
 
-      for (let i = 0; i < 3; i++) {
+      const btnGroup = document.createElement('div');
+      btnGroup.className = 'btn-group';
+
+      const shuffled = [...buttonTexts].sort(() => 0.5 - Math.random()).slice(0, 3);
+      shuffled.forEach(text => {
         const btn = document.createElement('button');
-        btn.textContent = ['OK', 'CONFIRM', 'YES'][i];
+        btn.textContent = text;
         btn.onclick = () => {
           document.getElementById('clickSound').play();
           popup.remove();
         };
-        popup.appendChild(btn);
-      }
+        btnGroup.appendChild(btn);
+      });
+
+      popup.appendChild(btnGroup);
 
       const iframe = document.createElement('iframe');
       iframe.src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
@@ -140,10 +164,9 @@
     function autoSpawn() {
       setInterval(() => {
         createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-      }, 50); // Popups appear every 50ms for rapid glitch effect
+      }, 50);
     }
 
-    // Start Breach and flood the screen with popups
     autoSpawn();
   </script>
 </body>
