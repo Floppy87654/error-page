@@ -28,7 +28,7 @@
     .popup {
       position: absolute;
       padding: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.7);
       z-index: 5000;
       animation: neonFlicker 1s infinite alternate;
       opacity: 1;
@@ -36,8 +36,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      border: 2px solid #fff;
-      border-radius: 5px;
+      border: 2px outset #fff;
+      border-radius: 2px;
       background: #c0c0c0;
       color: #000;
       font-family: Tahoma, sans-serif;
@@ -66,17 +66,18 @@
       gap: 5px;
       margin-top: auto;
       flex-wrap: wrap;
+      width: 100%;
     }
 
     .popup button {
       background: #fff;
       color: #000;
-      border: 2px solid #000;
+      border: 2px outset #000;
       padding: 5px 10px;
       font-size: 0.7rem;
       cursor: pointer;
       font-weight: bold;
-      border-radius: 3px;
+      border-radius: 2px;
       transition: all 0.3s ease;
     }
 
@@ -100,8 +101,9 @@
       }
 
       .popup .btn-group {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   </style>
