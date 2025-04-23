@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>💀 SYSTEM COMPROMISED 💀</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💀 SYSTEM COMPROMISED 💀</title>
   <style>
     html, body {
       margin: 0;
@@ -11,8 +11,9 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #0f0f0f;
-      font-family: monospace;
+      background: #1c1c1c; /* Darker background */
+      font-family: 'Courier New', monospace;
+      color: #E0E0E0; /* Light text color */
       user-select: none;
       cursor: none;
     }
@@ -20,49 +21,68 @@
     .popup {
       position: absolute;
       width: 250px;
-      height: 160px;
-      background: #111;
-      border: 2px solid #0ff;
-      color: #0ff;
-      font-size: 0.85rem;
+      height: 180px;
+      background: #121212;
+      border: 3px solid #ff9900;
+      font-size: 0.95rem;
+      padding: 10px;
       z-index: 9999;
-      padding: 8px;
+      box-shadow: 0 0 15px rgba(255, 153, 0, 0.7);
+      color: #ff9900;
       overflow: hidden;
-      box-shadow: 0 0 10px #0ff, 0 0 20px #f0f;
-      transition: none;
+      font-family: 'Comic Sans MS', cursive;
+      animation: popUpEffect 0.4s ease-in-out;
+    }
+
+    @keyframes popUpEffect {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     video, img, iframe {
       max-width: 100%;
       max-height: 100%;
     }
+
+    .alert-header {
+      font-weight: bold;
+      color: #00ff00;
+    }
+
+    /* Style for mobile responsiveness */
+    @media (max-width: 768px) {
+      .popup {
+        width: 200px;
+        height: 150px;
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 <body>
   <script>
     const wildTexts = [
-      "🧠 Neural breach in progress...",
-      "👁️ Visual cortex hijacked",
-      "🦠 Injecting quantum virus...",
-      "☢️ Nuke initialized: Abort?",
-      "🤖 System Host: UNKNOWN_AI_NODE_77",
-      "🛰️ Satellite sync to orbit...",
-      "🧬 DNA scramble initiated",
-      "🕳️ Jumping dimensions...",
-      "🌐 HYPERREALITY ENABLED"
+      "🔒 SYSTEM SHUTDOWN: Critical Error Detected!",
+      "📡 RETRIEVING SYSTEM DATA...",
+      "⚠️ VIRUS DETECTED: ATTACK IN PROGRESS!",
+      "🛑 SYSTEM WARNING: Unauthorized Access Attempted",
+      "💣 BOMB DETECTED: Disarming...",
+      "🖥️ SYSTEM CORE: Offline for repairs",
+      "💥 HACKER ALERT: Initiating Countermeasures",
+      "🧠 Neural Interface Error: Rebooting...",
+      "🛰️ Satellite Connection Lost. Attempting Reconnection..."
     ];
 
     const images = [
-      "https://i.imgur.com/ZI5g70H.gif",
-      "https://media.giphy.com/media/3oz8xKaR836UJOYeOc/giphy.gif",
-      "https://i.imgur.com/JJpZ3Ze.gif",
-      "https://media.tenor.com/wNntoDPbKo8AAAAC/matrix-code.gif",
-      "https://i.imgur.com/Yk9a4L5.gif"
+      "https://www.clipartkey.com/mpngs/m/99-998636_error-message-clip-art-vintage-computer-error-icon-vector.png",  /* Old PC error image */
+      "https://www.kindpng.com/picc/m/411-4111864_computer-warning-sign-vintage-warning-icon-png-transparent.png",  /* Alert warning icon */
+      "https://upload.wikimedia.org/wikipedia/commons/7/7c/Computer_error_icon.png", /* Retro error sign */
+      "https://upload.wikimedia.org/wikipedia/commons/a/a4/Windows_XP_error_popup.svg"  /* Windows XP alert vector */
     ];
 
     const videos = [
-      "https://www.youtube.com/embed/2ZIpFytCSVc?autoplay=1&mute=1",
-      "https://www.youtube.com/embed/sm7TPKxJo-k?autoplay=1&mute=1"
+      "https://www.youtube.com/embed/l60MnDJklnM?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/TcMBFSGVi1c?autoplay=1&mute=1"
     ];
 
     function createPopup() {
@@ -70,6 +90,7 @@
       div.className = 'popup';
       const rand = Math.random();
 
+      // Randomly choose a type of content for the popup (text, image, or video)
       if (rand < 0.33) {
         const img = document.createElement('img');
         img.src = images[Math.floor(Math.random() * images.length)];
@@ -82,20 +103,21 @@
         iframe.allow = "autoplay";
         div.appendChild(iframe);
       } else {
-        div.textContent = wildTexts[Math.floor(Math.random() * wildTexts.length)];
+        div.innerHTML = `<div class="alert-header">ERROR!</div>${wildTexts[Math.floor(Math.random() * wildTexts.length)]}`;
       }
 
-      div.style.top = Math.random() * (window.innerHeight - 160) + 'px';
+      // Randomly position popups on the screen
+      div.style.top = Math.random() * (window.innerHeight - 180) + 'px';
       div.style.left = Math.random() * (window.innerWidth - 250) + 'px';
       document.body.appendChild(div);
     }
 
     setInterval(() => {
-      for (let i = 0; i < 3; i++) createPopup(); // triplo a ogni ciclo per caos rapido
-    }, 150);
+      for (let i = 0; i < 3; i++) createPopup(); // Multiple popups appearing quickly
+    }, 100);
 
     window.addEventListener('click', () => {
-      for (let i = 0; i < 10; i++) createPopup();
+      for (let i = 0; i < 10; i++) createPopup(); // Create 10 popups on click
     });
   </script>
 </body>
