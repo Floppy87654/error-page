@@ -20,8 +20,8 @@
     .popup {
       position: absolute;
       width: auto;
-      max-width: 300px;
-      min-width: 180px;
+      max-width: 320px;
+      min-width: 220px;
       background: #e0e0e0;
       border: 3px outset #808080;
       font-size: 0.8rem;
@@ -29,6 +29,7 @@
       box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
       z-index: 5000;
       animation: blink 0.3s infinite alternate;
+      overflow: hidden;
     }
 
     @keyframes blink {
@@ -38,43 +39,51 @@
 
     .popup pre {
       white-space: pre-wrap;
+      word-wrap: break-word;
+      margin-bottom: 10px;
     }
 
     .popup .btn-container {
       display: flex;
-      justify-content: center;
-      flex-wrap: nowrap;
-      gap: 4px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
       margin-top: 10px;
-      flex-direction: row;
     }
 
     .popup button {
       background: #c0c0c0;
       color: #000;
       border: 2px outset #808080;
-      padding: 4px 10px;
+      padding: 6px 12px;
       font-size: 0.75rem;
       cursor: pointer;
       font-weight: bold;
-      flex-shrink: 0;
+      flex-grow: 1;
+      min-width: 80px;
+      max-width: 130px;
+      box-sizing: border-box;
     }
 
     iframe {
       width: 100%;
-      height: 160px;
+      height: 180px;
       margin-top: 8px;
       border: none;
     }
 
     @media (max-width: 600px) {
+      .popup {
+        max-width: 280px;
+      }
+
       .popup .btn-container {
-        flex-wrap: nowrap;
-        overflow-x: auto;
+        justify-content: center;
       }
 
       .popup button {
-        min-width: 80px;
+        min-width: 70px;
+        font-size: 0.65rem;
       }
     }
   </style>
@@ -84,8 +93,13 @@
 
   <script>
     const fakeLogs = [
-      ...Array.from({ length: 50 }, (_, i) => `Log ${i + 1} :: ${Math.random().toString(36).substring(2, 10)} -- ${new Date().toISOString()}`),
-      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nIPV6: fe80:fcdc:ef:fb22::d9\nUPNP: Enabled\nDMZ: 10.112.42.1\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`
+      ...Array.from({ length: 100 }, (_, i) => `Log ${i + 1} :: ${Math.random().toString(36).substring(2, 10)} -- ${new Date().toISOString()}`),
+      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nIPV6: fe80:fcdc:ef:fb22::d9\nUPNP: Enabled\nDMZ: 10.112.42.1\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`,
+      `WARNING: SYSTEM ERROR\nMemory Overflow: Address 0x004AB9AC\nData corrupted. Proceed with caution.`,
+      `Security Alert: Unauthorized login attempt detected from IP: 103.245.56.78`,
+      `SYSTEM FAILURE: Kernel panic! Please restart system.`,
+      `INFO: User requested to clear temporary files and cookies.`,
+      `ERROR: Disk not found. Please check the connections.`
     ];
 
     const videoLinks = [
@@ -95,7 +109,8 @@
       "https://www.youtube.com/embed/figrl0aOULs?autoplay=1&mute=1",
       "https://www.youtube.com/embed/MkmYuK17x6M?autoplay=1&mute=1",
       "https://www.youtube.com/embed/CN_MZpHkkgc?autoplay=1&mute=1",
-      "https://www.youtube.com/embed/77BtpGz1ZDg?autoplay=1&mute=1"
+      "https://www.youtube.com/embed/77BtpGz1ZDg?autoplay=1&mute=1",
+      "https://www.youtube.com/embed/7tRvsUJcJxw?autoplay=1&mute=1"
     ];
 
     function createPopup(x, y) {
@@ -139,7 +154,7 @@
     function autoSpawn() {
       setInterval(() => {
         createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-      }, 80); // Speed increased
+      }, 60); // Speed increased further
     }
 
     window.onload = () => {
