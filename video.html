@@ -93,14 +93,78 @@
 
   <script>
     const fakeLogs = [
-      ...Array.from({ length: 100 }, (_, i) => `Log ${i + 1} :: ${Math.random().toString(36).substring(2, 10)} -- ${new Date().toISOString()}`),
-      `IP: 92.28.211.23\nN: 43.7462\nW: 12.4893\nSSN: 697991915191519182043\nIPV6: fe80:fcdc:ef:fb22::d9\nUPNP: Enabled\nDMZ: 10.112.42.1\nDNS: 8.8.8.8\nALT DNS: 1.1.1.1`,
-      `WARNING: SYSTEM ERROR\nMemory Overflow: Address 0x004AB9AC\nData corrupted. Proceed with caution.`,
-      `Security Alert: Unauthorized login attempt detected from IP: 103.245.56.78`,
-      `SYSTEM FAILURE: Kernel panic! Please restart system.`,
-      `INFO: User requested to clear temporary files and cookies.`,
-      `ERROR: Disk not found. Please check the connections.`
-    ];
+  "Log 1: SYSTEM BOOTING...\nLog 2: Memory check complete\nLog 3: CPU usage: 80%\nERROR: Failed to load config file.\nWarning: Unauthorized access detected.",
+  "INFO: User requested to clear temporary files and cookies.\nDisk scan complete: No errors found.",
+  "ALERT: Connection lost to the database server. Reconnecting...\nReconnect successful. Session resumed.",
+  "SYSTEM FAILURE: Kernel panic! Please restart system.",
+  "Security Alert: Unauthorized login attempt detected from IP: 103.245.56.78\nAttempt blocked. Further actions required.",
+  "INFO: System running on emergency power. Please restore main power.",
+  "ERROR: Disk not found. Please check connections and restart.",
+  "WARNING: Temperature critical. CPU at 95°C. Shutdown imminent.",
+  "INFO: User logged in successfully at 15:32:01.\nPrevious session ended unexpectedly.",
+  "ALERT: Unexpected shutdown detected. Possible power failure.",
+  "DEBUG: Network packet received from 192.168.1.55\nProcessing data...\nOperation complete.",
+  "INFO: Data recovery process started...\nFiles found: 1023\nRecovered: 1023",
+  "WARNING: Insufficient disk space. Only 1% remaining.",
+  "ERROR: System memory overload. Please close unnecessary applications.",
+  "ALERT: Security breach detected. IP 209.143.52.78 attempting unauthorized access.",
+  "INFO: Firewall enabled successfully.\nSecurity level set to HIGH.",
+  "SYSTEM ERROR: RAM failure. Please replace faulty module.",
+  "INFO: Scheduled system update in progress... Rebooting in 5 minutes.",
+  "ERROR: Missing system files. Reinstallation required.",
+  "ALERT: High network latency detected. 250ms ping to server.",
+  "WARNING: Unresponsive application: chrome.exe\nForce quitting process.",
+  "INFO: Log file saved at: /var/log/system.log\nLast successful backup: 3 days ago.",
+  "SYSTEM ALERT: Security update applied successfully.\nSystem is up-to-date.",
+  "INFO: Application update available. Version 2.1.0\nDownload started...",
+  "DEBUG: User session expired at 18:00:02. Logging out.",
+  "ERROR: Network disconnect detected. Retrying...",
+  "ALERT: Hard drive failure imminent. Backup required immediately.",
+  "INFO: System restart complete. All services running normally.",
+  "WARNING: Memory leak detected in process 'explorer.exe'. Close application.",
+  "INFO: User installed new software: Antivirus 2025\nRunning first scan...",
+  "ALERT: Unauthorized access attempt blocked from IP: 192.168.100.101\nAttempt logged.",
+  "INFO: Scheduled cleanup completed. Temporary files cleared.",
+  "ERROR: User login failed. Incorrect password entered three times.",
+  "SYSTEM FAILURE: Failed to initialize critical system service. Rebooting...",
+  "INFO: User requested to shutdown system.\nShutdown process initiated.",
+  "ALERT: Unexpected service crash. Service name: 'networking'. Restarting service...",
+  "DEBUG: New network interface detected: eth0. Configuring IP...",
+  "INFO: System running in safe mode due to a detected issue. Restart to resolve.",
+  "WARNING: Power supply voltage low. Please replace power supply unit.",
+  "ERROR: System clock is out of sync. Syncing time with NTP server.",
+  "INFO: USB device plugged in: 'External Drive'. Mounting...",
+  "ALERT: Detected new peripheral: 'Logitech Keyboard'. Installing drivers...",
+  "INFO: Security scan complete. No threats detected.",
+  "ERROR: Blue screen of death encountered. Kernel crash report generated.",
+  "WARNING: Application crash detected. Attempting recovery...",
+  "INFO: Auto backup completed successfully at 03:00 AM.",
+  "ALERT: Server running out of memory. Increasing virtual memory size.",
+  "INFO: Network settings updated.\nDNS server changed to: 8.8.8.8",
+  "ERROR: Failed to establish secure connection to the server.",
+  "INFO: Download complete: 'important_update_v2.0.exe'. Ready for installation.",
+  "SYSTEM ALERT: CPU usage exceeded 90% for the last 5 minutes.",
+  "INFO: Database query executed successfully. 120 rows returned.",
+  "ALERT: Access attempt to restricted file detected. Unauthorized process blocked.",
+  "WARNING: Power failure detected. Switching to battery backup.",
+  "INFO: VPN connection established successfully.",
+  "ERROR: Unable to start service 'mysql'. Please check the configuration.",
+  "INFO: System restore completed successfully to the last known good configuration.",
+  "ALERT: Security vulnerability detected in the OS. Immediate patch recommended.",
+  "INFO: Scheduled system scan completed. No issues found.",
+  "WARNING: File system corruption detected. Running fsck...",
+  "ERROR: Unable to resolve hostname. Network connectivity issue.",
+  "INFO: User settings successfully synchronized with cloud storage.",
+  "ALERT: File download failed. Insufficient permissions to write to the destination folder.",
+  "INFO: Scheduled task executed successfully at 2:00 AM.",
+  "SYSTEM WARNING: File permissions misconfigured. Review access controls.",
+  "INFO: Task completed successfully.\nTotal time: 5 minutes.",
+  "ALERT: Database corruption detected. Backup recommended before proceeding.",
+  "ERROR: The system failed to validate the integrity of a critical file.",
+  "INFO: System idle for 5 minutes. Entering sleep mode.",
+  "ALERT: User account locked due to multiple failed login attempts."
+];
+
 
     const videoLinks = [
       "https://www.youtube.com/embed/sISkfNmRaKg?autoplay=1&mute=1",
@@ -114,9 +178,9 @@
     ];
 
     const buttonLabels = [
-      'CLICK HERE', 'MORE INFO', 'CONFIRM', 'CONTINUE',
-      'YES', 'LAUNCH', 'OK', 'RUN', 'ACCEPT', 'ABORT',
-      'CANCEL', 'RETRY', 'IGNORE', 'HELP', 'EXIT'
+      'CLICK HERE', 'MORE INFO', 'Confirm', 'CONTINUE',
+      'YES', 'LAUNCH', 'Ok', 'Run', 'ACCEPT', 'Check',
+      'CANCEL', 'RETRY', 'IGNORE', 'Get', 'EXIT'
     ];
 
     function getRandomSizeClass() {
@@ -134,7 +198,7 @@
       const randomWidth = Math.floor(Math.random() * (maxWidth - minWidth)) + minWidth;
       popup.style.width = `${randomWidth}px`;
 
-      // Aggiunge contenuto log o video
+      // Aggiunge contenuto: log o video
       if (Math.random() < 0.5) {
         const content = document.createElement('pre');
         content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
