@@ -86,6 +86,26 @@
         font-size: 0.65rem;
       }
     }
+
+    /* Dimensioni casuali per i bottoni */
+    .popup button.btn-small {
+      font-size: 0.6rem;
+      padding: 4px 6px;
+      min-width: 60px;
+      max-width: 100px;
+    }
+    .popup button.btn-medium {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      min-width: 80px;
+      max-width: 130px;
+    }
+    .popup button.btn-large {
+      font-size: 1rem;
+      padding: 10px 16px;
+      min-width: 100px;
+      max-width: 160px;
+    }
   </style>
 </head>
 <body>
@@ -113,10 +133,28 @@
       "https://www.youtube.com/embed/7tRvsUJcJxw?autoplay=1&mute=1"
     ];
 
+    const buttonLabels = [
+      'CLICK HERE', 'MORE INFO', 'CONFIRM', 'CONTINUE',
+      'YES', 'LAUNCH', 'OK', 'RUN', 'ACCEPT', 'ABORT',
+      'CANCEL', 'RETRY', 'IGNORE', 'HELP', 'EXIT'
+    ];
+
+    function getRandomSizeClass() {
+      const sizes = ['btn-small', 'btn-medium', 'btn-large'];
+      return sizes[Math.floor(Math.random() * sizes.length)];
+    }
+
     function createPopup(x, y) {
       const popup = document.createElement('div');
       popup.className = 'popup';
 
+      // Imposta dimensione casuale del popup
+      const minWidth = 200;
+      const maxWidth = 400;
+      const randomWidth = Math.floor(Math.random() * (maxWidth - minWidth)) + minWidth;
+      popup.style.width = `${randomWidth}px`;
+
+      // Aggiunge contenuto log o video
       if (Math.random() < 0.5) {
         const content = document.createElement('pre');
         content.textContent = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
@@ -131,11 +169,15 @@
       const btnContainer = document.createElement('div');
       btnContainer.className = 'btn-container';
 
-      const labels = ['CLICK HERE', 'MORE INFO', 'CONFIRM', 'CONTINUE', 'YES', 'LAUNCH'];
+      // Seleziona un numero casuale di bottoni (da 2 a 6)
+      const shuffled = [...buttonLabels].sort(() => 0.5 - Math.random());
+      const numButtons = Math.floor(Math.random() * 5) + 2; // 2 a 6 bottoni
+      const selectedLabels = shuffled.slice(0, numButtons);
 
-      labels.forEach(label => {
+      selectedLabels.forEach(label => {
         const btn = document.createElement('button');
         btn.textContent = label;
+        btn.classList.add(getRandomSizeClass());
         btn.onclick = () => {
           document.getElementById('clickSound').play();
           for (let j = 0; j < 5; j++) {
@@ -146,15 +188,20 @@
       });
 
       popup.appendChild(btnContainer);
-      popup.style.top = `${y}px`;
-      popup.style.left = `${x}px`;
+
+      // Posizionamento casuale (corretto per non uscire dallo schermo)
+      const maxTop = window.innerHeight - 200;
+      const maxLeft = window.innerWidth - randomWidth;
+      popup.style.top = `${Math.min(y, maxTop)}px`;
+      popup.style.left = `${Math.min(x, maxLeft)}px`;
+
       document.body.appendChild(popup);
     }
 
     function autoSpawn() {
       setInterval(() => {
         createPopup(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-      }, 60); // Speed increased further
+      }, 60); // Velocità aumentata
     }
 
     window.onload = () => {
