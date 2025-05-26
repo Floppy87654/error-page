@@ -17,25 +17,30 @@
       touch-action: none;
     }
 
-    .popup {
-      position: absolute;
-      width: auto;
-      max-width: 340px;
-      min-width: 280px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border: none;
-      border-radius: 16px;
-      font-size: 0.9rem;
-      padding: 20px;
-      box-shadow: 
-        0 20px 40px rgba(0,0,0,0.3),
-        0 0 0 1px rgba(255,255,255,0.1);
-      z-index: 5000;
-      animation: popup-pulse 2s ease-in-out infinite alternate;
-      overflow: hidden;
-      color: #333;
-    }
+   .popup {
+  position: fixed; /* CAMBIA QUESTO */
+  top: 50%;         /* AGGIUNGI QUESTO */
+  left: 50%;        /* AGGIUNGI QUESTO */
+  transform: translate(-50%, -50%); /* AGGIUNGI QUESTO */
+
+  width: auto;
+  max-width: 340px;
+  min-width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: none;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  padding: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.1);
+  z-index: 5000;
+  animation: popup-pulse 2s ease-in-out infinite alternate;
+  overflow: hidden;
+  color: #333;
+}
+
 
     @keyframes popup-pulse {
       from { 
