@@ -61,13 +61,14 @@
       border-left: 4px solid #ff6b6b;
     }
 
-    .popup .btn-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 15px;
-    }
+   .popup .btn-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 15px;
+}
 
     .popup button {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -123,30 +124,33 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
 
-    @media (max-width: 600px) {
-      .popup {
-        max-width: 320px;
-        min-width: 300px;
-        padding: 18px;
-        margin: 10px;
-      }
+  @media (max-width: 600px) {
+  .popup {
+    max-width: 95vw;
+    min-width: 90vw;
+    padding: 16px;
+    margin: 10px;
+  }
 
-      .popup .btn-container {
-        flex-direction: column;
-        gap: 12px;
-      }
+  .popup .btn-container {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+  }
 
-      .popup button {
-        min-width: 100%;
-        max-width: 100%;
-        padding: 14px 18px;
-        font-size: 0.85rem;
-      }
+  .popup button {
+    min-width: 45%;
+    max-width: 48%;
+    padding: 12px 10px;
+    font-size: 0.85rem;
+  }
 
-      iframe {
-        height: 180px;
-      }
-    }
+  iframe {
+    height: 160px;
+  }
+}
+
 
     @media (max-width: 480px) {
       .popup {
